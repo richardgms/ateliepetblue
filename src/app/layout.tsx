@@ -11,7 +11,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Ateliê Pet Blue | Cuidado com Amor",
   description:
-    "Banho e tosa, veterinário e acessórios em Santa Rita, PB. Seu pet merece um cuidado completo e acolhedor.",
+    "Há mais de 10 anos, o Ateliê Pet Blue cuida de pets com amor, técnica e carinho em Santa Rita, PB.",
 };
 
 export default function RootLayout({

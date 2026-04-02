@@ -54,7 +54,7 @@ const businessPhoneHref = "tel:+5583986776200";
 const whatsappLink =
   "https://wa.me/5583986776200?text=Olá!%20Gostaria%20de%20agendar%20um%20horário%20para%20meu%20pet.";
 const mapsLink =
-  "https://www.google.com/maps/search/?api=1&query=Rua+Venâncio+Correia,+117,+Santa+Rita,+PB";
+  "https://www.google.com/maps/place/Ateli%C3%AA+Pet+Blue/@-7.1376428,-34.9849551,19z/data=!3m1!4b1!4m6!3m5!1s0x7acef1d5a432953:0x4ea87ddbdedaf14e!8m2!3d-7.1376441!4d-34.9837374!16s%2Fg%2F11j4ndc8qk?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D";
 const addressLabel = "Rua Venâncio Correia, 117, Santa Rita, Paraíba";
 
 const localBusinessSchema = {
@@ -89,30 +89,35 @@ const services = [
     name: "Estética",
     icon: Scissors,
     desc: "Banho e tosa com cuidado, técnica e acabamento impecável.",
+    bgImage: "/assets/services/service-estetica.webp",
   },
   {
     id: 2,
     name: "Veterinário",
     icon: Stethoscope,
     desc: "Consultas especializadas para acompanhar a saúde do seu pet.",
+    bgImage: "/assets/services/service-veterinario.webp",
   },
   {
     id: 3,
     name: "Acessórios",
     icon: ShoppingBag,
     desc: "Itens selecionados para conforto, estilo e praticidade.",
+    bgImage: "/assets/services/service-acessorios.webp",
   },
   {
     id: 4,
     name: "Medicamentos",
     icon: Syringe,
     desc: "Farmácia veterinária com apoio para a rotina de cuidados.",
+    bgImage: "/assets/services/service-medicamentos.webp",
   },
   {
     id: 5,
     name: "Rações",
     icon: Bone,
     desc: "Nutrição de qualidade para cães e gatos em todas as fases.",
+    bgImage: "/assets/services/service-racoes.webp",
   },
 ];
 
@@ -129,7 +134,7 @@ const features = [
   },
   {
     title: "Estrutura acolhedora",
-    desc: "Ambiente limpo, climatizado e pensado para reduzir o estresse.",
+    desc: "Ambiente limpo, climatizado e pensado para reduzir o estresse com carinho.",
     icon: Sparkles,
   },
 ];
@@ -145,7 +150,7 @@ const quickStats = [
   },
   {
     title: "Conforto\ne carinho",
-    subtitle: "Ambiente pensado para reduzir estresse e acolher.",
+    subtitle: "+10 anos cuidando com amor, técnica e carinho.",
   },
 ];
 
@@ -158,6 +163,21 @@ function WhatsAppIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
     >
       <path fill="currentColor" d="M16.75 13.96c.25.13.41.2.46.3.06.11.04.61-.21 1.18-.2.56-1.24 1.1-1.7 1.12-.46.02-.47.36-2.96-.73-2.49-1.09-3.99-3.75-4.11-3.92-.12-.17-.96-1.38-.92-2.61.05-1.22.69-1.8.95-2.04.24-.26.51-.29.68-.26h.47c.15 0 .36-.06.55.45l.69 1.87c.06.13.1.28.01.44l-.27.41-.39.42c-.12.12-.26.25-.12.5.12.26.62 1.09 1.32 1.78.91.88 1.71 1.17 1.95 1.3.24.14.39.12.54-.04l.81-.94c.19-.25.35-.19.58-.11l1.67.88M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10c-1.97 0-3.8-.57-5.35-1.55L2 22l1.55-4.65A9.969 9.969 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8c0 1.72.54 3.31 1.46 4.61L4.5 19.5l2.89-.96A7.95 7.95 0 0 0 12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={cn("size-4 shrink-0 fill-current", className)}
+      focusable="false"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+    >
+      <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5a4.25 4.25 0 0 0 4.25 4.25h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5Z" />
+      <path d="M12 6.25A5.75 5.75 0 1 1 6.25 12 5.76 5.76 0 0 1 12 6.25Zm0 1.5A4.25 4.25 0 1 0 16.25 12 4.25 4.25 0 0 0 12 7.75Z" />
+      <circle cx="17.25" cy="6.75" r="1.1" />
     </svg>
   );
 }
@@ -370,18 +390,18 @@ export default function Home() {
               variant="secondary"
               className="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] text-white backdrop-blur sm:mb-5 sm:px-3 sm:text-xs"
             >
-              O melhor pet shop de Santa Rita
+              Há mais de 10 anos cuidando de pets
             </Badge>
             <h1 className="max-w-3xl text-[1.7rem] font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              <span className="block">Seu pet merece um cuidado humano, calmo e completo.</span>
+              <span className="block">Seu pet merece um cuidado com amor, técnica e carinho.</span>
               <span className="mt-3 block text-cyan-100">
                 Ateliê Pet Blue.
               </span>
             </h1>
             <p className="mx-auto mt-3 hidden max-w-sm text-[0.78rem] leading-5 text-white/82 sm:mt-6 sm:block sm:max-w-xl sm:text-lg sm:leading-7 lg:mx-0">
-              Banho e tosa, atendimento veterinário, acessórios e rações em um
-              espaço pensado para deixar o seu melhor amigo confortável do
-              início ao fim.
+              Banho e tosa, atendimento veterinário, acessórios e rações com
+              uma equipe especialista, que há mais de 10 anos cuida do seu pet
+              com atenção, carinho e segurança.
             </p>
 
             <div className="mt-6 grid w-full grid-cols-2 gap-2 sm:mt-8 sm:flex sm:w-auto sm:flex-row lg:justify-start">
@@ -454,28 +474,28 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-20 overflow-hidden bg-[#4294bf] px-4 py-20 sm:px-6">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <section className="relative z-20 overflow-hidden bg-[#4294bf] bg-gradient-to-br from-[#4294bf] via-[#3a82a8] to-[#2d6684] px-4 py-20 sm:px-6">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             className="relative"
           >
-            <div className="overflow-hidden rounded-3xl shadow-xl shadow-black/20">
-              <div className="relative h-[420px]">
+            <div className="h-full overflow-hidden rounded-3xl shadow-xl shadow-black/20">
+              <div className="relative h-full min-h-[400px]">
                 <Image
                   src="/assets/about-uniform.png"
                   alt="Equipe do Ateliê Pet Blue"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
               </div>
             </div>
           </motion.div>
 
-          <div className="space-y-6">
+          <div className="flex flex-col justify-center space-y-4 lg:space-y-5">
             <Badge
               variant="outline"
               className="rounded-full border-white/20 bg-white/10 px-3 py-1 text-white"
@@ -483,28 +503,48 @@ export default function Home() {
               Sobre o espaço
             </Badge>
             <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Um ambiente pensado para o bem-estar do seu pet.
+              Um ambiente pensado para o bem-estar do seu pet, com experiência e dedicação de verdade.
             </h2>
-            <p className="max-w-2xl text-base leading-7 text-white/90 sm:text-lg">
-              O Ateliê Pet Blue nasceu para transformar o cuidado em uma
+            <p className="max-w-2xl text-base leading-7 text-white/80 sm:text-lg">
+              O Ateliê Pet Blue há mais de 10 anos transforma o cuidado em uma
               experiência agradável. Cada detalhe do ambiente e do atendimento
-              é pensado para reduzir o estresse e aumentar a confiança.
+              é pensado para reduzir o estresse e aumentar a confiança, com
+              amor, técnica e carinho.
             </p>
 
-            <Card className="border-border/60 bg-white/95 shadow-sm backdrop-blur">
-              <CardContent className="space-y-4 p-6">
+            <Card className="relative overflow-hidden border-white/20 bg-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] backdrop-blur-xl">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-6 -right-6 h-32 w-32 sm:-bottom-10 sm:-right-10 sm:h-48 sm:w-48"
+              >
+                <Image
+                  src="/assets/about-space-emblem.webp"
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 8rem, 12rem"
+                  className="object-contain opacity-40 brightness-0 invert"
+                />
+              </div>
+              <CardContent className="relative z-10 space-y-3.5 p-5 sm:p-6">
                 {[
-                  "Profissionais treinados",
-                  "Equipamentos modernos",
+                  "Profissionais especialistas",
+                  "Mais de 10 anos de atuação",
                   "Ambiente climatizado",
-                ].map((item) => (
-                  <div
+                ].map((item, i) => (
+                  <motion.div
                     key={item}
-                    className="flex items-center gap-3 text-sm font-medium text-pet-midnight"
+                    initial={{ opacity: 0, x: -12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.4 }}
+                    whileHover={{ x: 6, color: "#ffffff" }}
+                    className="flex items-center gap-3 text-sm font-medium text-white/90 transition-colors"
                   >
-                    <CheckCircle2 className="size-5 text-[#4294bf]" />
+                    <div className="flex size-7 items-center justify-center rounded-full bg-white/15 shadow-inner">
+                      <CheckCircle2 className="size-4 text-cyan-200" />
+                    </div>
                     {item}
-                  </div>
+                  </motion.div>
                 ))}
               </CardContent>
             </Card>
@@ -540,18 +580,43 @@ export default function Home() {
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ y: -6 }}
               >
-                <Card className="group h-full border-border/60 bg-white/95 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
-                  <CardHeader className="items-center text-center">
-                    <div className="mb-2 flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                      <service.icon className="size-6" />
+                <Card className={cn(
+                  "group relative h-full min-h-[12.5rem] overflow-hidden border-border/60 bg-white/95 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 sm:min-h-[19rem]",
+                  service.bgImage && "border-white/10 bg-[#062a30]"
+                )}>
+                  {service.bgImage && (
+                    <>
+                      <Image
+                        src={service.bgImage}
+                        alt={service.name}
+                        fill
+                        className="object-cover opacity-50 transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60"
+                      />
+                      <div className="absolute inset-0 bg-[#062a30]/30 group-hover:bg-[#062a30]/40 transition-opacity" />
+                    </>
+                  )}
+                  <CardContent className="relative z-10 flex h-full flex-col px-4 py-4 text-center sm:py-7">
+                    <div className="flex flex-col items-center gap-2 sm:gap-3">
+                      <div className={cn(
+                        "flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground sm:size-14",
+                        service.bgImage && "bg-white/20 text-white group-hover:bg-white group-hover:text-primary"
+                      )}>
+                        <service.icon className="size-5 sm:size-6" />
+                      </div>
+                      <CardTitle className={cn("text-base sm:text-lg", service.bgImage && "text-white")}>
+                        {service.name}
+                      </CardTitle>
+                      <Badge
+                        variant={service.bgImage ? "secondary" : "outline"}
+                        className={cn("w-fit rounded-full text-[11px] sm:text-sm", service.bgImage && "border-white/20 bg-white/10 text-white")}
+                      >
+                        Cuidado premium
+                      </Badge>
                     </div>
-                    <CardTitle className="text-lg">{service.name}</CardTitle>
-                    <Badge variant="outline" className="rounded-full">
-                      Cuidado premium
-                    </Badge>
-                  </CardHeader>
-                  <CardContent className="pb-6 text-center">
-                    <CardDescription className="text-sm leading-6 text-muted-foreground">
+                    <CardDescription className={cn(
+                      "mx-auto mt-2.5 max-w-[18ch] text-xs leading-5 text-muted-foreground sm:mt-3 sm:max-w-[20ch] sm:text-sm sm:leading-6",
+                      service.bgImage && "text-white/80"
+                    )}>
                       {service.desc}
                     </CardDescription>
                   </CardContent>
@@ -573,11 +638,13 @@ export default function Home() {
                 Diferenciais
               </Badge>
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                Um lugar bonito por fora e confiável por dentro.
+                Um lugar bonito por fora e confiável por dentro, com uma equipe
+                especialista.
               </h2>
               <p className="max-w-xl text-base leading-7 text-white/80">
                 O objetivo não é só atender. É fazer o pet sair confortável, e o
-                tutor sair seguro de que encontrou um lugar de confiança.
+                tutor sair seguro de que encontrou um lugar de confiança com
+                mais de 10 anos de experiência.
               </p>
             </div>
 
@@ -613,7 +680,7 @@ export default function Home() {
       </section>
 
       <section className="relative z-10 overflow-hidden bg-pet-soft px-4 py-20 sm:px-6">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <Card className="overflow-hidden border-border/60 bg-white shadow-2xl shadow-primary/20">
             <CardContent className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
               <div className="space-y-4 text-center lg:text-left">
@@ -661,14 +728,14 @@ export default function Home() {
         </div>
       </section>
 
-      <footer id="contato" className="bg-pet-deep px-4 pb-10 pt-16 sm:px-6 relative z-10 text-white">
+      <footer id="contato" className="relative z-10 bg-pet-deep px-4 pb-6 pt-10 text-white sm:px-6 sm:pb-8 sm:pt-12">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.9fr_0.9fr]">
-          <div className="space-y-4">
+          <div className="flex flex-col items-center gap-8 text-center sm:grid sm:gap-6 sm:text-left lg:grid-cols-[1.2fr_0.9fr_0.9fr]">
+            <div className="space-y-3 sm:flex sm:h-full sm:flex-col">
               <div className="flex items-center gap-3">
                 <LogoMark className="size-11" />
                 <div>
@@ -680,11 +747,12 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <p className="max-w-md text-sm leading-7 text-pet-soft/80">
+              <p className="hidden max-w-md text-sm leading-6 text-pet-soft/80 sm:block">
                 Banho e tosa, atendimento veterinário, acessórios, medicamentos
-                e rações para o cuidado completo do seu pet.
+                e rações com amor, técnica e carinho para o cuidado completo do
+                seu pet.
               </p>
-              <div className="flex gap-3">
+              <div className="mt-6 flex justify-center gap-3 sm:mt-12 sm:justify-start">
                 <a
                   href="https://instagram.com/ateliepetblue"
                   target="_blank"
@@ -692,20 +760,21 @@ export default function Home() {
                   aria-label="Siga o Ateliê Pet Blue no Instagram"
                   className={`${buttonVariants({
                     variant: "outline",
-                    size: "icon",
-                  })} border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white`}
+                    size: "default",
+                  })} mx-auto gap-2 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white`}
                 >
-                  <ExternalLink className="size-4" />
+                  <span>Nos siga no Instagram</span>
+                  <InstagramIcon className="size-4" />
                 </a>
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="hidden space-y-3 sm:block">
               <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
                 Serviços locais
               </h4>
               <Card className="border-white/15 bg-white/5 backdrop-blur shadow-none">
-                <CardContent className="space-y-3 p-5 text-sm text-pet-soft/80">
+                <CardContent className="space-y-2.5 p-3.5 text-sm text-pet-soft/80 sm:p-4">
                   <div>Banho e tosa em Santa Rita</div>
                   <div>Atendimento veterinário</div>
                   <div>Acessórios e medicamentos</div>
@@ -714,51 +783,40 @@ export default function Home() {
               </Card>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
                 Contato e endereço
               </h4>
-              <Card className="border-white/15 bg-white/5 backdrop-blur shadow-none">
-                <CardContent className="space-y-4 p-5 text-sm text-pet-soft/80">
-                  <a
-                    href={businessPhoneHref}
-                    className="flex items-center gap-3 font-semibold text-white transition-colors hover:text-pet-soft"
-                  >
-                    <Phone className="size-4 text-pet-sky" />
-                    {businessPhone}
-                  </a>
-                  <a
-                    href={whatsappLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-pet-soft"
-                  >
-                    <WhatsAppIcon className="text-pet-sky" />
-                    Abrir WhatsApp
-                    <ExternalLink className="size-4" />
-                  </a>
-                  <address className="not-italic flex items-start gap-3 text-sm text-pet-soft/80">
-                    <MapPin className="mt-0.5 size-4 shrink-0 text-pet-sky" />
-                    <span>{addressLabel}</span>
-                  </address>
-                  <a
-                    href={mapsLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-pet-soft"
-                  >
-                    Ver no Google Maps
-                    <ExternalLink className="size-4" />
-                  </a>
-                </CardContent>
-              </Card>
+              <div className="grid grid-cols-1 gap-4 text-center text-sm text-pet-soft/80 sm:space-y-4 sm:rounded-xl sm:border sm:border-white/15 sm:bg-white/5 sm:p-5 sm:text-left sm:backdrop-blur">
+                <a
+                  href={businessPhoneHref}
+                  className="flex items-center justify-center gap-2.5 font-semibold text-white transition-colors hover:text-pet-soft sm:justify-start"
+                >
+                  <Phone className="size-4 text-pet-sky" />
+                  {businessPhone}
+                </a>
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 font-medium text-white transition-colors hover:text-pet-soft sm:justify-start"
+                >
+                  <WhatsAppIcon className="text-pet-sky" />
+                  Abrir WhatsApp
+                  <ExternalLink className="size-4" />
+                </a>
+                <address className="not-italic flex items-start justify-center gap-2.5 text-sm text-pet-soft/80 sm:justify-start">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-pet-sky" />
+                  <span>{addressLabel}</span>
+                </address>
+              </div>
             </div>
           </div>
 
-          <Separator className="my-8 bg-white/15" />
+          <Separator className="my-5 bg-white/15 sm:my-6" />
 
-          <div className="flex flex-col gap-4 text-center text-sm text-pet-soft/70 md:flex-row md:items-center md:justify-between md:text-left">
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 md:justify-start">
+          <div className="flex flex-col gap-3 text-center text-sm text-pet-soft/70 md:flex-row md:items-center md:justify-between md:text-left">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 md:justify-start">
               <div className="flex items-center gap-2">
                 <Clock className="size-4 text-pet-sky" />
                 <span>Segunda a sexta: 08h às 17h</span>
@@ -768,9 +826,9 @@ export default function Home() {
                 <span>Sábado: 08h às 15h</span>
               </div>
             </div>
-            <p>
-              © 2026 Ateliê Pet Blue. Cuidado, confiança e proximidade em Santa
-              Rita/PB.
+            <p className="leading-5">
+              © 2026 Ateliê Pet Blue. Há mais de 10 anos cuidando com amor,
+              técnica e carinho em Santa Rita/PB.
             </p>
           </div>
         </div>
@@ -824,3 +882,4 @@ export default function Home() {
     </main>
   );
 }
+
