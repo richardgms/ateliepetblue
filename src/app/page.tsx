@@ -53,6 +53,22 @@ const businessPhone = "(83) 98677-6200";
 const businessPhoneHref = "tel:+5583986776200";
 const whatsappLink =
   "https://wa.me/5583986776200?text=Olá!%20Gostaria%20de%20agendar%20um%20horário%20para%20meu%20pet.";
+const servicesWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Acabei%20de%20ver%20os%20servi%C3%A7os%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20agendar%20um%20atendimento%20para%20meu%20pet.";
+const headerWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20falar%20com%20voc%C3%AAs%20sobre%20os%20servi%C3%A7os.";
+const headerScheduleWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20agendar%20um%20hor%C3%A1rio%20para%20meu%20pet.";
+const mobileMenuWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20agendar%20pelo%20WhatsApp.";
+const heroWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20agendar%20um%20atendimento%20para%20meu%20pet.";
+const ctaWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20falar%20sobre%20agendamento%20para%20meu%20pet.";
+const footerWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20atendimento%20pelo%20WhatsApp.";
+const footerContactWhatsappLink =
+  "https://wa.me/5583986776200?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Ateli%C3%AA%20Pet%20Blue%20e%20quero%20mais%20informa%C3%A7%C3%B5es%20sobre%20contato%20e%20atendimento.";
 const mapsLink =
   "https://www.google.com/maps/place/Ateli%C3%AA+Pet+Blue/@-7.1376428,-34.9849551,19z/data=!3m1!4b1!4m6!3m5!1s0x7acef1d5a432953:0x4ea87ddbdedaf14e!8m2!3d-7.1376441!4d-34.9837374!16s%2Fg%2F11j4ndc8qk?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D";
 const addressLabel = "Rua Venâncio Correia, 117, Santa Rita, Paraíba";
@@ -126,16 +142,19 @@ const features = [
     title: "Amor sem limites",
     desc: "Tratamos cada pet como se fosse nosso, com atenção real aos detalhes.",
     icon: Heart,
+    bgImage: "/assets/features/feature-amor.webp",
   },
   {
     title: "Equipe profissional",
     desc: "Um time preparado para cuidar com técnica, paciência e segurança.",
     icon: CheckCircle2,
+    bgImage: "/assets/features/feature-equipe.webp",
   },
   {
     title: "Estrutura acolhedora",
     desc: "Ambiente limpo, climatizado e pensado para reduzir o estresse com carinho.",
     icon: Sparkles,
+    bgImage: "/assets/features/feature-estrutura.webp",
   },
 ];
 
@@ -196,6 +215,7 @@ function LogoMark({
         alt=""
         fill
         sizes="64px"
+        loading="eager"
         className={cn("rounded-full object-contain", imageClassName)}
       />
     </div>
@@ -292,7 +312,7 @@ export default function Home() {
 
           <div className="hidden items-center gap-3 sm:flex">
             <motion.a
-              href={whatsappLink}
+              href={headerWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: headerColor, borderColor: headerColor }}
@@ -301,7 +321,7 @@ export default function Home() {
               Falar no WhatsApp
             </motion.a>
             <a
-              href={whatsappLink}
+              href={headerScheduleWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(buttonVariants({ variant: "default", size: "default" }), "h-8 border border-primary")}
@@ -347,7 +367,7 @@ export default function Home() {
                 </div>
                 <div className="mt-auto grid gap-3 p-4">
                   <a
-                    href={whatsappLink}
+                    href={mobileMenuWhatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={buttonVariants({ variant: "default", size: "default" })}
@@ -367,7 +387,7 @@ export default function Home() {
         </div>
       </motion.header>
 
-      <section className="relative isolate z-10 flex min-h-[100svh] items-center overflow-hidden px-4 pb-4 pt-20 sm:px-6 lg:h-screen lg:pb-32 lg:pt-36">
+      <section className="relative isolate z-10 flex min-h-[100svh] items-end overflow-hidden px-4 pb-24 pt-16 sm:items-center sm:px-6 lg:h-screen lg:pb-32 lg:pt-36">
         <Image
           src="/assets/hero.webp"
           alt="Ateliê Pet Blue - Banner"
@@ -375,11 +395,10 @@ export default function Home() {
           priority
           quality={90}
           sizes="100vw"
-          className="pointer-events-none object-cover object-center"
+          className="pointer-events-none object-cover object-[94%_center] sm:object-center"
         />
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(0,30,71,0.9)_0%,rgba(0,30,71,0.72)_45%,rgba(0,30,71,0.28)_100%)] lg:bg-[linear-gradient(90deg,rgba(0,30,71,0.82)_0%,rgba(0,30,71,0.62)_45%,rgba(0,30,71,0.18)_100%)]" />
-
-        <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(0,30,71,0.44)_0%,rgba(0,30,71,0.56)_100%)] lg:bg-[linear-gradient(90deg,rgba(0,30,71,0.82)_0%,rgba(0,30,71,0.62)_45%,rgba(0,30,71,0.18)_100%)]" />
+        <div className="relative z-10 mx-auto w-full max-w-6xl translate-y-24 sm:translate-y-0">
           <motion.div
             initial={{ opacity: 0, x: -32 }}
             animate={{ opacity: 1, x: 0 }}
@@ -388,11 +407,12 @@ export default function Home() {
           >
             <Badge
               variant="secondary"
-              className="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] text-white backdrop-blur sm:mb-5 sm:px-3 sm:text-xs"
+              style={{ borderColor: "rgba(140, 185, 200, 0.35)" }}
+              className="w-full justify-center rounded-full border bg-white/10 px-4 py-3 text-[13px] text-center font-medium text-white backdrop-blur sm:mb-5 sm:w-auto sm:px-3 sm:py-1 sm:text-xs"
             >
               Há mais de 10 anos cuidando de pets
             </Badge>
-            <h1 className="max-w-3xl text-[1.7rem] font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mx-auto w-full max-w-[23rem] text-[1.45rem] font-semibold leading-[1.06] tracking-tight text-white sm:max-w-3xl sm:text-5xl lg:mx-0 lg:max-w-3xl lg:text-6xl">
               <span className="block">Seu pet merece um cuidado com amor, técnica e carinho.</span>
               <span className="mt-3 block text-cyan-100">
                 Ateliê Pet Blue.
@@ -404,9 +424,9 @@ export default function Home() {
               com atenção, carinho e segurança.
             </p>
 
-            <div className="mt-6 grid w-full grid-cols-2 gap-2 sm:mt-8 sm:flex sm:w-auto sm:flex-row lg:justify-start">
+            <div className="mt-1 grid w-full grid-cols-2 gap-2 sm:mt-8 sm:flex sm:w-auto sm:flex-row lg:justify-start">
               <a
-                href={whatsappLink}
+                href={heroWhatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -437,11 +457,11 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="mt-6 grid w-full gap-2 sm:hidden">
+            <div className="mt-1 grid w-full gap-2 sm:hidden">
               {quickStats.map((stat) => (
                 <div
                   key={stat.title}
-                  className="flex w-full min-h-[4.75rem] flex-col justify-center rounded-2xl border border-white/20 bg-white/12 px-3 py-2.5 text-center backdrop-blur-md"
+                  className="flex w-full min-h-[4.75rem] flex-col justify-center rounded-2xl border border-white/12 bg-white/8 px-3 py-2.5 text-center backdrop-blur-md"
                 >
                   <p className="whitespace-nowrap text-[0.72rem] font-semibold uppercase leading-none tracking-[0.08em] text-white">
                     {stat.title.replace(/\n/g, " ")}
@@ -457,7 +477,7 @@ export default function Home() {
               {quickStats.map((stat) => (
                 <Card
                   key={stat.title}
-                  className="w-full justify-self-stretch border-white/20 bg-white/12 backdrop-blur-md"
+                  className="w-full justify-self-stretch border-white/12 bg-white/8 backdrop-blur-md"
                 >
                   <CardContent className="p-2.5 text-center sm:p-4">
                     <p className="whitespace-pre-line text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-white sm:text-base sm:tracking-[0.14em]">
@@ -485,7 +505,7 @@ export default function Home() {
             <div className="h-full overflow-hidden rounded-3xl shadow-xl shadow-black/20">
               <div className="relative h-full min-h-[400px]">
                 <Image
-                  src="/assets/about-uniform.png"
+                  src="/assets/about-uniform.webp"
                   alt="Equipe do Ateliê Pet Blue"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -624,6 +644,19 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+          <div className="mt-8 flex justify-center">
+            <a
+              href={servicesWhatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "w-full max-w-sm sm:w-auto"
+              )}
+            >
+              Quero agendar pelo WhatsApp
+            </a>
+          </div>
         </div>
       </section>
 
@@ -657,8 +690,22 @@ export default function Home() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ delay: index * 0.08 }}
                 >
-                  <Card className="h-full border-white/15 bg-white/10 text-white backdrop-blur">
-                    <CardHeader>
+                  <Card className={cn(
+                    "group relative h-full overflow-hidden border-white/15 bg-white/10 text-white backdrop-blur",
+                    feature.bgImage && "border-white/10"
+                  )}>
+                    {feature.bgImage && (
+                      <>
+                        <Image
+                          src={feature.bgImage}
+                          alt={feature.title}
+                          fill
+                          className="object-cover opacity-50 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-60"
+                        />
+                        <div className="absolute inset-0 bg-[#062a30]/30 group-hover:bg-[#062a30]/40 transition-opacity" />
+                      </>
+                    )}
+                    <CardHeader className="relative z-10 pt-7">
                       <div className="mb-3 flex size-12 items-center justify-center rounded-2xl bg-white/12 text-white">
                         <feature.icon className="size-5" />
                       </div>
@@ -666,7 +713,7 @@ export default function Home() {
                         {feature.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="relative z-10">
                       <CardDescription className="text-sm leading-6 text-white/75">
                         {feature.desc}
                       </CardDescription>
@@ -679,52 +726,53 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 overflow-hidden bg-pet-soft px-4 py-20 sm:px-6">
-        <div className="mx-auto max-w-6xl">
-          <Card className="overflow-hidden border-border/60 bg-white shadow-2xl shadow-primary/20">
-            <CardContent className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div className="space-y-4 text-center lg:text-left">
-                <Badge
-                  variant="outline"
-                  className="rounded-full border-primary/20 bg-primary/5 text-primary"
-                >
-                  Agendamento
-                </Badge>
-                <h2 className="text-3xl font-semibold tracking-tight text-pet-midnight sm:text-4xl">
-                  Pronto para dar o melhor para seu pet?
-                </h2>
-                <p className="max-w-2xl text-base leading-7 text-pet-midnight/70 sm:text-lg">
-                  Agende um banho, tosa ou atendimento e sinta a diferença de
-                  um espaço que trabalha com carinho e organização.
-                </p>
-              </div>
+      <section className="relative z-10 overflow-hidden border-y border-white/45 bg-[linear-gradient(90deg,rgba(255,255,255,0.82)_0%,rgba(248,251,255,0.76)_45%,rgba(223,241,245,0.82)_100%)] px-4 py-5 sm:px-6 sm:py-6">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/80"
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#0f93a8]/10" />
+        <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+          <div className="space-y-2 text-center lg:max-w-2xl lg:text-left">
+            <Badge
+              variant="outline"
+              className="rounded-full border border-[#0f93a8]/35 bg-white/70 text-pet-deep backdrop-blur-md"
+              style={{ borderColor: "rgba(15, 147, 168, 0.24)" }}
+            >
+              Agendamento
+            </Badge>
+            <h2 className="text-2xl font-semibold tracking-tight text-pet-midnight sm:text-3xl">
+              Pronto para dar o melhor para seu pet?
+            </h2>
+            <p className="mx-auto max-w-2xl text-sm leading-6 text-pet-midnight/72 sm:text-base lg:mx-0">
+              Agende um banho, tosa ou atendimento com uma equipe organizada e cuidadosa.
+            </p>
+          </div>
 
-              <div className="flex flex-col gap-3">
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonVariants({
-                    variant: "default",
-                    size: "lg",
-                  })}
-                >
-                  Falar pelo WhatsApp
-                </a>
-                <a
-                  href={mapsLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonVariants({
-                    variant: "outline",
-                    size: "lg",
-                  })}
-                >
-                  Ver no Google Maps
-                </a>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex flex-col gap-3 sm:flex-row lg:min-w-[26rem] lg:justify-end">
+            <a
+              href={ctaWhatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "w-full sm:w-auto"
+              )}
+            >
+              Falar pelo WhatsApp
+            </a>
+            <a
+              href={mapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "w-full border-pet-deep/20 bg-white/80 text-pet-deep hover:bg-white hover:text-pet-midnight sm:w-auto"
+              )}
+            >
+              Ver no Google Maps
+            </a>
+          </div>
         </div>
       </section>
 
@@ -734,11 +782,53 @@ export default function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col items-center gap-8 text-center sm:grid sm:gap-6 sm:text-left lg:grid-cols-[1.2fr_0.9fr_0.9fr]">
-            <div className="space-y-3 sm:flex sm:h-full sm:flex-col">
-              <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center gap-4 text-center sm:hidden">
+            <div className="flex items-center justify-center gap-3">
+              <LogoMark className="size-10" />
+              <div className="text-left">
+                <h3 className="text-base font-semibold text-white">{businessName}</h3>
+                <p className="text-xs text-pet-soft/75">Santa Rita/PB</p>
+              </div>
+            </div>
+
+            <div className="flex w-full flex-col gap-2">
+              <a
+                href={footerWhatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "default", size: "default" }),
+                  "w-full"
+                )}
+              >
+                Falar no WhatsApp
+              </a>
+              <a
+                href={businessPhoneHref}
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "default" }),
+                  "w-full border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                )}
+              >
+                {businessPhone}
+              </a>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-pet-soft/70">
+              <span>Seg-Sex 08h às 17h</span>
+              <span>Sáb 08h às 15h</span>
+            </div>
+
+            <p className="text-xs leading-5 text-pet-soft/65">
+              © 2026 Ateliê Pet Blue.
+            </p>
+          </div>
+
+          <div className="hidden flex-col items-center gap-8 text-center sm:grid sm:items-stretch sm:justify-items-center sm:gap-6 sm:text-center lg:grid-cols-[1.2fr_0.9fr_0.9fr]">
+            <div className="flex h-full flex-col items-center gap-4">
+              <div className="flex items-center justify-center gap-3">
                 <LogoMark className="size-11" />
-                <div>
+                <div className="text-center">
                   <h3 className="text-lg font-semibold text-white">
                     {businessName}
                   </h3>
@@ -747,12 +837,13 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <p className="hidden max-w-md text-sm leading-6 text-pet-soft/80 sm:block">
+
+              <p className="hidden max-w-md text-sm leading-6 text-pet-soft/80 sm:block lg:max-w-[30ch] xl:max-w-[34ch]">
                 Banho e tosa, atendimento veterinário, acessórios, medicamentos
                 e rações com amor, técnica e carinho para o cuidado completo do
                 seu pet.
               </p>
-              <div className="mt-6 flex justify-center gap-3 sm:mt-12 sm:justify-start">
+              <div className="flex justify-center gap-3">
                 <a
                   href="https://instagram.com/ateliepetblue"
                   target="_blank"
@@ -761,7 +852,7 @@ export default function Home() {
                   className={`${buttonVariants({
                     variant: "outline",
                     size: "default",
-                  })} mx-auto gap-2 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white`}
+                  })} mx-auto gap-2 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white sm:h-11 sm:px-5 sm:text-base sm:gap-2.5`}
                 >
                   <span>Nos siga no Instagram</span>
                   <InstagramIcon className="size-4" />
@@ -769,53 +860,66 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="hidden space-y-3 sm:block">
-              <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
+            <div className="hidden h-full sm:flex sm:flex-col sm:items-center sm:gap-4">
+              <h4 className="text-center text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
                 Serviços locais
               </h4>
-              <Card className="border-white/15 bg-white/5 backdrop-blur shadow-none">
-                <CardContent className="space-y-2.5 p-3.5 text-sm text-pet-soft/80 sm:p-4">
-                  <div>Banho e tosa em Santa Rita</div>
-                  <div>Atendimento veterinário</div>
-                  <div>Acessórios e medicamentos</div>
-                  <div>Rações para cães e gatos</div>
+
+              <Card className="flex-1 w-full max-w-sm border-white/15 bg-white/5 backdrop-blur shadow-none sm:h-full">
+                <CardContent className="flex h-full flex-col items-center justify-center p-4 text-center text-sm text-pet-soft/80 sm:p-5">
+                  <div className="flex w-full flex-col items-center gap-3">
+                    <div>Banho e tosa em Santa Rita</div>
+                    <Separator className="w-16 bg-white/10" />
+                    <div>Atendimento veterinário</div>
+                    <Separator className="w-16 bg-white/10" />
+                    <div>Acessórios e medicamentos</div>
+                    <Separator className="w-16 bg-white/10" />
+                    <div>Rações para cães e gatos</div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="space-y-3">
-              <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
+            <div className="flex h-full flex-col items-center gap-4">
+              <h4 className="text-center text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
                 Contato e endereço
               </h4>
-              <div className="grid grid-cols-1 gap-4 text-center text-sm text-pet-soft/80 sm:space-y-4 sm:rounded-xl sm:border sm:border-white/15 sm:bg-white/5 sm:p-5 sm:text-left sm:backdrop-blur">
-                <a
-                  href={businessPhoneHref}
-                  className="flex items-center justify-center gap-2.5 font-semibold text-white transition-colors hover:text-pet-soft sm:justify-start"
-                >
-                  <Phone className="size-4 text-pet-sky" />
-                  {businessPhone}
-                </a>
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 font-medium text-white transition-colors hover:text-pet-soft sm:justify-start"
-                >
-                  <WhatsAppIcon className="text-pet-sky" />
-                  Abrir WhatsApp
-                  <ExternalLink className="size-4" />
-                </a>
-                <address className="not-italic flex items-start justify-center gap-2.5 text-sm text-pet-soft/80 sm:justify-start">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-pet-sky" />
-                  <span>{addressLabel}</span>
-                </address>
-              </div>
+
+              <Card className="flex-1 w-full max-w-sm lg:max-w-[250px] border-white/15 bg-white/5 backdrop-blur shadow-none sm:h-full">
+                <CardContent className="flex h-full flex-col items-center justify-center p-4 text-center text-sm text-pet-soft/80 sm:p-5">
+                  <div className="flex w-full max-w-xs flex-col items-center gap-3">
+                    <a
+                      href={businessPhoneHref}
+                      className="flex items-center justify-center gap-2.5 font-semibold text-white transition-colors hover:text-pet-soft"
+                    >
+                      <Phone className="size-4 shrink-0 text-pet-sky" />
+                      {businessPhone}
+                    </a>
+                    <Separator className="w-16 bg-white/10" />
+                    <a
+                      href={footerContactWhatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 font-medium text-white transition-colors hover:text-pet-soft"
+                    >
+                      <WhatsAppIcon className="shrink-0 text-pet-sky" />
+                      Abrir WhatsApp
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                    <Separator className="w-16 bg-white/10" />
+                    <address className="not-italic flex items-center justify-center gap-2.5">
+                      <MapPin className="mt-0.5 size-4 shrink-0 text-pet-sky" />
+                      <span>{addressLabel}</span>
+                    </address>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
 
-          <Separator className="my-5 bg-white/15 sm:my-6" />
+          <Separator className="my-5 hidden bg-white/15 sm:my-6 sm:block" />
 
-          <div className="flex flex-col gap-3 text-center text-sm text-pet-soft/70 md:flex-row md:items-center md:justify-between md:text-left">
+          <div className="hidden flex-col gap-3 text-center text-sm text-pet-soft/70 md:flex-row md:items-center md:justify-between md:text-left sm:flex">
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 md:justify-start">
               <div className="flex items-center gap-2">
                 <Clock className="size-4 text-pet-sky" />
@@ -834,52 +938,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Color Palette Design System Overlay */}
-      <div className="fixed bottom-6 right-6 z-[100] hidden lg:block">
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="glass flex items-center gap-4 rounded-full p-2.5 shadow-2xl transition-all hover:scale-105"
-        >
-          <div className="flex -space-x-2 px-1">
-            <div
-              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
-              style={{ backgroundColor: "#001e47" }}
-              title="Pet Midnight (#001e47)"
-            />
-            <div
-              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
-              style={{ backgroundColor: "#004da5" }}
-              title="Pet Deep (#004da5)"
-            />
-            <div
-              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
-              style={{ backgroundColor: "#0f93a8" }}
-              title="Pet Ocean (#0f93a8)"
-            />
-            <div
-              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
-              style={{ backgroundColor: "#8cb9c8" }}
-              title="Pet Sky (#8cb9c8)"
-            />
-            <div
-              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
-              style={{ backgroundColor: "#dff1f5" }}
-              title="Pet Soft (#dff1f5)"
-            />
-            <div
-              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
-              style={{ backgroundColor: "#f8fbff" }}
-              title="Pet Base (#f8fbff)"
-            />
-          </div>
-          <div className="pr-4 border-l border-foreground/10 pl-4">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">Design System</p>
-            <p className="text-xs font-semibold text-foreground">Pet Blue Palette</p>
-          </div>
-        </motion.div>
-      </div>
+
     </main>
   );
 }
-
