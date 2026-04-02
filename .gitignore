@@ -30,6 +30,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# local MCP/dev helpers
+/.cache/
+docs/router-pro.md
+scripts/router-pro.cjs
+search_results.txt
+
 # env files (can opt-in for committing if needed)
 .env*
 

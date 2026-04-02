@@ -1,29 +1,62 @@
 'use client';
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { 
-  Heart, 
-  Scissors, 
-  Stethoscope, 
-  ShoppingBag, 
-  MapPin, 
-  Clock, 
-  Phone, 
-  ExternalLink,
-  CheckCircle,
-  ChevronRight,
-  Sparkles,
+import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
+import {
   Bone,
-  Syringe
+  CheckCircle2,
+  ChevronRight,
+  Clock,
+  ExternalLink,
+  Heart,
+  MapPin,
+  Menu,
+  Phone,
+  Scissors,
+  ShoppingBag,
+  Sparkles,
+  Syringe,
+  Stethoscope,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const businessName = "Ateliê Pet Blue";
 const businessPhone = "(83) 98677-6200";
 const businessPhoneHref = "tel:+5583986776200";
-const whatsappLink = "https://wa.me/5583986776200?text=Olá!%20Gostaria%20de%20agendar%20um%20horário%20para%20meu%20pet.";
-const mapsLink = "https://www.google.com/maps/search/?api=1&query=Rua+Venâncio+Correia,+117,+Santa+Rita,+PB";
+const whatsappLink =
+  "https://wa.me/5583986776200?text=Olá!%20Gostaria%20de%20agendar%20um%20horário%20para%20meu%20pet.";
+const mapsLink =
+  "https://www.google.com/maps/search/?api=1&query=Rua+Venâncio+Correia,+117,+Santa+Rita,+PB";
 const addressLabel = "Rua Venâncio Correia, 117, Santa Rita, Paraíba";
+
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "PetStore",
@@ -39,286 +72,755 @@ const localBusinessSchema = {
     addressCountry: "BR",
   },
   areaServed: "Santa Rita, PB",
-  openingHours: [
-    "Mo-Fr 08:00-17:00",
-    "Sa 08:00-15:00",
-  ],
-  sameAs: [
-    "https://instagram.com/ateliepetblue",
-  ],
+  openingHours: ["Mo-Fr 08:00-17:00", "Sa 08:00-15:00"],
+  sameAs: ["https://instagram.com/ateliepetblue"],
 };
 
+const navItems = [
+  { label: "Início", href: "#topo" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Diferenciais", href: "#diferenciais" },
+  { label: "Contato", href: "#contato" },
+];
+
 const services = [
-  { id: 1, name: "ESTÉTICA", icon: Scissors, desc: "Banho e tosa com amor e cuidado." },
-  { id: 2, name: "VETERINÁRIO", icon: Stethoscope, desc: "Consultas especializadas para seu pet." },
-  { id: 3, name: "ACESSÓRIOS", icon: ShoppingBag, desc: "O melhor estilo para seu melhor amigo." },
-  { id: 4, name: "MEDICAMENTOS", icon: Syringe, desc: "Farmácia veterinária completa." },
-  { id: 5, name: "RAÇÕES", icon: Bone, desc: "Nutrição de alta qualidade." },
+  {
+    id: 1,
+    name: "Estética",
+    icon: Scissors,
+    desc: "Banho e tosa com cuidado, técnica e acabamento impecável.",
+  },
+  {
+    id: 2,
+    name: "Veterinário",
+    icon: Stethoscope,
+    desc: "Consultas especializadas para acompanhar a saúde do seu pet.",
+  },
+  {
+    id: 3,
+    name: "Acessórios",
+    icon: ShoppingBag,
+    desc: "Itens selecionados para conforto, estilo e praticidade.",
+  },
+  {
+    id: 4,
+    name: "Medicamentos",
+    icon: Syringe,
+    desc: "Farmácia veterinária com apoio para a rotina de cuidados.",
+  },
+  {
+    id: 5,
+    name: "Rações",
+    icon: Bone,
+    desc: "Nutrição de qualidade para cães e gatos em todas as fases.",
+  },
 ];
 
 const features = [
-  { title: "Amor sem Limites", desc: "Tratamos cada pet como se fosse nosso.", icon: Heart },
-  { title: "Profissionais", desc: "Equipe especializada e apaixonada.", icon: CheckCircle },
-  { title: "Estrutura", desc: "Ambiente seguro, limpo e divertido.", icon: Sparkles },
+  {
+    title: "Amor sem limites",
+    desc: "Tratamos cada pet como se fosse nosso, com atenção real aos detalhes.",
+    icon: Heart,
+  },
+  {
+    title: "Equipe profissional",
+    desc: "Um time preparado para cuidar com técnica, paciência e segurança.",
+    icon: CheckCircle2,
+  },
+  {
+    title: "Estrutura acolhedora",
+    desc: "Ambiente limpo, climatizado e pensado para reduzir o estresse.",
+    icon: Sparkles,
+  },
 ];
 
-export default function Home() {
+const quickStats = [
+  {
+    title: "Cuidado\ncompleto",
+    subtitle: "Banho, tosa, veterinário, acessórios e rações.",
+  },
+  {
+    title: "Atendimento\nlocal",
+    subtitle: "Em Santa Rita/PB, perto de você e do seu pet.",
+  },
+  {
+    title: "Conforto\ne carinho",
+    subtitle: "Ambiente pensado para reduzir estresse e acolher.",
+  },
+];
+
+function WhatsAppIcon({ className }: { className?: string }) {
   return (
-    <main className="relative min-h-screen">
-      {/* Floating Header */}
-      <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-pet-ocean rounded-full flex items-center justify-center text-white font-bold text-xl">
-              B
+    <svg
+      className={cn("size-4 shrink-0 fill-current", className)}
+      focusable="false"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+    >
+      <path fill="currentColor" d="M16.75 13.96c.25.13.41.2.46.3.06.11.04.61-.21 1.18-.2.56-1.24 1.1-1.7 1.12-.46.02-.47.36-2.96-.73-2.49-1.09-3.99-3.75-4.11-3.92-.12-.17-.96-1.38-.92-2.61.05-1.22.69-1.8.95-2.04.24-.26.51-.29.68-.26h.47c.15 0 .36-.06.55.45l.69 1.87c.06.13.1.28.01.44l-.27.41-.39.42c-.12.12-.26.25-.12.5.12.26.62 1.09 1.32 1.78.91.88 1.71 1.17 1.95 1.3.24.14.39.12.54-.04l.81-.94c.19-.25.35-.19.58-.11l1.67.88M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10c-1.97 0-3.8-.57-5.35-1.55L2 22l1.55-4.65A9.969 9.969 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8c0 1.72.54 3.31 1.46 4.61L4.5 19.5l2.89-.96A7.95 7.95 0 0 0 12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8z" />
+    </svg>
+  );
+}
+
+function LogoMark({
+  className,
+  imageClassName,
+}: {
+  className?: string;
+  imageClassName?: string;
+}) {
+  return (
+    <div className={cn("relative overflow-hidden rounded-full bg-transparent", className)}>
+      <Image
+        src="/assets/logo.webp"
+        alt=""
+        fill
+        sizes="64px"
+        className={cn("rounded-full object-contain", imageClassName)}
+      />
+    </div>
+  );
+}
+
+export default function Home() {
+  const { scrollY } = useScroll();
+
+  const headerBg = useTransform(
+    scrollY,
+    [0, 400],
+    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.85)"]
+  );
+
+  const headerBlur = useTransform(
+    scrollY,
+    [0, 400],
+    ["blur(0px)", "blur(20px)"]
+  );
+
+  const headerBorder = useTransform(
+    scrollY,
+    [0, 400],
+    ["rgba(217, 230, 238, 0)", "rgba(217, 230, 238, 0.6)"]
+  );
+
+  const headerColor = useTransform(
+    scrollY,
+    [0, 400],
+    ["rgba(255, 255, 255, 1)", "rgba(0, 30, 71, 1)"]
+  );
+
+  const headerMuted = useTransform(
+    scrollY,
+    [0, 400],
+    ["rgba(255, 255, 255, 0.75)", "rgba(91, 100, 114, 1)"]
+  );
+
+  return (
+    <main
+      id="topo"
+      className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_right,_rgba(15,147,168,0.15),_transparent_30%),radial-gradient(circle_at_top_left,_rgba(0,77,165,0.14),_transparent_28%),linear-gradient(to_bottom,_#fbfeff,_#f5fbff_45%,_#ffffff)]"
+    >
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[linear-gradient(180deg,rgba(255,255,255,0.85),transparent)]" />
+
+      <motion.header
+        style={{
+          backgroundColor: headerBg,
+          backdropFilter: headerBlur,
+          borderBottomColor: headerBorder,
+          color: headerColor,
+        }}
+        className="fixed inset-x-0 top-0 z-50 border-b outline-none transition-none"
+      >
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+          <Link href="#topo" className="flex items-center gap-3">
+            <LogoMark className="size-11" />
+            <div className="hidden sm:block">
+              <motion.p
+                style={{ color: headerColor }}
+                className="text-sm font-semibold tracking-tight"
+              >
+                {businessName}
+              </motion.p>
+              <motion.p
+                style={{ color: headerMuted }}
+                className="text-xs"
+              >
+                Pet shop em Santa Rita/PB
+              </motion.p>
             </div>
-            <span className="font-bold text-pet-deep hidden sm:inline">Ateliê Pet Blue</span>
+          </Link>
+
+          <NavigationMenu className="hidden lg:flex">
+            <NavigationMenuList className="gap-1">
+              {navItems.map((item) => (
+                <NavigationMenuItem key={item.href}>
+                  <NavigationMenuLink
+                    href={item.href}
+                    render={
+                      <motion.a
+                        style={{ color: headerColor }}
+                        className={navigationMenuTriggerStyle()}
+                      />
+                    }
+                  >
+                    {item.label}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          <div className="hidden items-center gap-3 sm:flex">
+            <motion.a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: headerColor, borderColor: headerColor }}
+              className={cn(buttonVariants({ variant: "outline", size: "default" }), "h-8 bg-transparent border transition-none")}
+            >
+              Falar no WhatsApp
+            </motion.a>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonVariants({ variant: "default", size: "default" }), "h-8 border border-primary")}
+            >
+              Agendar agora
+            </a>
           </div>
-          <div className="flex gap-4">
-            <a href="#servicos" className="text-sm font-medium text-pet-deep/80 hover:text-pet-ocean transition-colors focus-visible:outline-2 focus-visible:outline-pet-ocean focus-visible:outline-offset-4 rounded-md">Serviços</a>
-            <a href="#contato" className="text-sm font-medium text-pet-deep/80 hover:text-pet-ocean transition-colors focus-visible:outline-2 focus-visible:outline-pet-ocean focus-visible:outline-offset-4 rounded-md">Contato</a>
+
+          <div className="lg:hidden">
+            <Sheet>
+              <SheetTrigger
+                render={
+                  <motion.button
+                    style={{ color: headerColor, borderColor: headerBorder }}
+                    className="flex size-10 items-center justify-center rounded-xl border transition-none"
+                    aria-label="Abrir menu"
+                  />
+                }
+              >
+                <Menu className="size-5" />
+              </SheetTrigger>
+              <SheetContent>
+                <SheetHeader>
+                  <SheetTitle>{businessName}</SheetTitle>
+                  <SheetDescription>
+                    Navegue pelas seções principais e chame direto no WhatsApp.
+                  </SheetDescription>
+                </SheetHeader>
+                <div className="grid gap-2 px-4">
+                  {navItems.map((item) => (
+                    <SheetClose
+                      key={item.href}
+                      render={
+                        <a
+                          href={item.href}
+                          className="rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                        />
+                      }
+                    >
+                      {item.label}
+                    </SheetClose>
+                  ))}
+                </div>
+                <div className="mt-auto grid gap-3 p-4">
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonVariants({ variant: "default", size: "default" })}
+                  >
+                    Agendar no WhatsApp
+                  </a>
+                  <a
+                    href={businessPhoneHref}
+                    className={buttonVariants({ variant: "outline", size: "default" })}
+                  >
+                    Ligar agora
+                  </a>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
-          <a 
-            href={whatsappLink} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Agendar horário pelo WhatsApp"
-            className="bg-pet-ocean text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-pet-deep active:scale-95 transition-all focus-visible:ring-2 focus-visible:ring-pet-ocean focus-visible:ring-offset-2"
-          >
-            Agendar
-          </a>
         </div>
-      </nav>
+      </motion.header>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-20 right-[-100px] w-[300px] h-[300px] bg-pet-ocean/10 rounded-full blur-3xl -z-10" />
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+      <section className="relative isolate z-10 flex min-h-[100svh] items-center overflow-hidden px-4 pb-4 pt-20 sm:px-6 lg:h-screen lg:pb-32 lg:pt-36">
+        <Image
+          src="/assets/hero.webp"
+          alt="Ateliê Pet Blue - Banner"
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+          className="pointer-events-none object-cover object-center"
+        />
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(0,30,71,0.9)_0%,rgba(0,30,71,0.72)_45%,rgba(0,30,71,0.28)_100%)] lg:bg-[linear-gradient(90deg,rgba(0,30,71,0.82)_0%,rgba(0,30,71,0.62)_45%,rgba(0,30,71,0.18)_100%)]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, x: -32 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center lg:text-left"
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="mx-auto flex max-w-xl flex-col items-center space-y-4 text-center sm:space-y-0 lg:mx-0 lg:max-w-3xl lg:items-start lg:text-left"
           >
-            <span className="inline-block px-4 py-1.5 bg-pet-ocean/10 text-pet-ocean text-sm font-bold rounded-full mb-6">
-              O melhor Pet Shop de Santa Rita
-            </span>
-            <h1 className="text-4xl sm:text-6xl font-bold text-pet-deep leading-tight mb-6">
-              Seu pet merece o melhor <br />
-              <span className="text-pet-ocean uppercase italic tracking-tighter">Cuidado com Amor!</span>
+            <Badge
+              variant="secondary"
+              className="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] text-white backdrop-blur sm:mb-5 sm:px-3 sm:text-xs"
+            >
+              O melhor pet shop de Santa Rita
+            </Badge>
+            <h1 className="max-w-3xl text-[1.7rem] font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <span className="block">Seu pet merece um cuidado humano, calmo e completo.</span>
+              <span className="mt-3 block text-cyan-100">
+                Ateliê Pet Blue.
+              </span>
             </h1>
-            <p className="text-lg text-slate-600 mb-10 max-w-lg mx-auto lg:mx-0">
-              No Ateliê Pet Blue, seu amigo recebe tratamento VIP com uma equipe que entende que pets são membros da família.
+            <p className="mx-auto mt-3 hidden max-w-sm text-[0.78rem] leading-5 text-white/82 sm:mt-6 sm:block sm:max-w-xl sm:text-lg sm:leading-7 lg:mx-0">
+              Banho e tosa, atendimento veterinário, acessórios e rações em um
+              espaço pensado para deixar o seu melhor amigo confortável do
+              início ao fim.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a 
+
+            <div className="mt-6 grid w-full grid-cols-2 gap-2 sm:mt-8 sm:flex sm:w-auto sm:flex-row lg:justify-start">
+              <a
                 href={whatsappLink}
-                aria-label="Chamar Ateliê Pet Blue no WhatsApp"
-                className="bg-pet-ocean text-white px-8 py-4 rounded-full text-lg font-bold shadow-xl hover:bg-pet-deep transition-colors flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-pet-ocean focus-visible:ring-offset-2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({
+                    variant: "default",
+                    size: "default",
+                  }),
+                  "w-full sm:w-auto"
+                )}
               >
-                <Phone className="w-5 h-5" />
-                Chamar no WhatsApp
+                <WhatsAppIcon />
+                <span className="sm:hidden">WhatsApp</span>
+                <span className="hidden sm:inline">Chamar no WhatsApp</span>
               </a>
-              <a 
+              <a
                 href="#servicos"
-                className="bg-white text-pet-deep border-2 border-slate-100 px-8 py-4 rounded-full text-lg font-bold hover:border-pet-ocean transition-all flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-pet-ocean focus-visible:ring-offset-2"
+                className={cn(
+                  buttonVariants({
+                    variant: "outline",
+                    size: "default",
+                  }),
+                  "border-white/35 bg-white/10 text-white hover:bg-white/20 hover:text-white w-full sm:w-auto"
+                )}
               >
-                Nossos Serviços
-                <ChevronRight className="w-5 h-5" />
+                <span className="sm:hidden">Serviços</span>
+                <span className="hidden sm:inline">Ver serviços</span>
+                <ChevronRight className="size-4" />
               </a>
             </div>
-          </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1, type: "spring" }}
-            className="relative h-[400px] sm:h-[550px] w-full"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-pet-ocean/20 to-transparent rounded-full -rotate-6 scale-95" />
-            <Image 
-              src="/assets/hero-pets.png" 
-              alt="Ateliê Pet Blue Hero" 
-              fill
-              className="object-contain drop-shadow-2xl animate-float"
-              priority
-            />
+            <div className="mt-6 grid w-full gap-2 sm:hidden">
+              {quickStats.map((stat) => (
+                <div
+                  key={stat.title}
+                  className="flex w-full min-h-[4.75rem] flex-col justify-center rounded-2xl border border-white/20 bg-white/12 px-3 py-2.5 text-center backdrop-blur-md"
+                >
+                  <p className="whitespace-nowrap text-[0.72rem] font-semibold uppercase leading-none tracking-[0.08em] text-white">
+                    {stat.title.replace(/\n/g, " ")}
+                  </p>
+                  <p className="mt-1 text-[0.66rem] leading-4 text-white/72">
+                    {stat.subtitle}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 hidden w-full gap-1.5 sm:mt-10 sm:grid sm:grid-cols-3 lg:max-w-3xl">
+              {quickStats.map((stat) => (
+                <Card
+                  key={stat.title}
+                  className="w-full justify-self-stretch border-white/20 bg-white/12 backdrop-blur-md"
+                >
+                  <CardContent className="p-2.5 text-center sm:p-4">
+                    <p className="whitespace-pre-line text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-white sm:text-base sm:tracking-[0.14em]">
+                      {stat.title}
+                    </p>
+                    <p className="mx-auto mt-1.5 max-w-[15ch] text-[0.68rem] leading-4 text-white/75 sm:mt-2 sm:max-w-[18ch] sm:text-sm sm:leading-6">
+                      {stat.subtitle}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-24 bg-white px-6">
-        <div className="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row gap-16 items-center">
-          <motion.div 
-            whileInView={{ opacity: 1, scale: 1 }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            className="lg:w-1/2 relative h-[450px] w-full rounded-[3rem] overflow-hidden pixar-shadow shadow-pet-deep/5 border-8 border-slate-50"
+      <section className="relative z-20 overflow-hidden bg-[#4294bf] px-4 py-20 sm:px-6">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            className="relative"
           >
-            <Image 
-              src="/assets/about-uniform.png" 
-              alt="Sobre o Ateliê" 
-              fill
-              className="object-cover"
-            />
+            <div className="overflow-hidden rounded-3xl shadow-xl shadow-black/20">
+              <div className="relative h-[420px]">
+                <Image
+                  src="/assets/about-uniform.png"
+                  alt="Equipe do Ateliê Pet Blue"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </motion.div>
-          
-          <div className="lg:w-1/2">
-            <h2 className="text-3xl sm:text-5xl font-bold text-pet-deep mb-8">
-              Um ambiente pensado no <br />
-              <span className="text-pet-ocean">Bem-Estar do seu Pet</span>
+
+          <div className="space-y-6">
+            <Badge
+              variant="outline"
+              className="rounded-full border-white/20 bg-white/10 px-3 py-1 text-white"
+            >
+              Sobre o espaço
+            </Badge>
+            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Um ambiente pensado para o bem-estar do seu pet.
             </h2>
-            <p className="text-lg text-slate-600 mb-6 font-medium leading-relaxed">
-              O Ateliê Pet Blue nasceu do desejo de transformar o momento do cuidado em uma experiência prazerosa. Aqui, cada detalhe — do ambiente às técnicas — é planejado para reduzir o estresse e aumentar a felicidade do seu bichinho.
+            <p className="max-w-2xl text-base leading-7 text-white/90 sm:text-lg">
+              O Ateliê Pet Blue nasceu para transformar o cuidado em uma
+              experiência agradável. Cada detalhe do ambiente e do atendimento
+              é pensado para reduzir o estresse e aumentar a confiança.
             </p>
-            <div className="space-y-4">
-              {['Profissionais Treinados', 'Equipamentos Modernos', 'Ambiente Climatizado'].map((item) => (
-                <div key={item} className="flex items-center gap-3 text-slate-700 font-bold">
-                  <CheckCircle className="text-pet-ocean w-6 h-6" />
-                  {item}
-                </div>
+
+            <Card className="border-border/60 bg-white/95 shadow-sm backdrop-blur">
+              <CardContent className="space-y-4 p-6">
+                {[
+                  "Profissionais treinados",
+                  "Equipamentos modernos",
+                  "Ambiente climatizado",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 text-sm font-medium text-pet-midnight"
+                  >
+                    <CheckCircle2 className="size-5 text-[#4294bf]" />
+                    {item}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicos" className="relative z-10 overflow-hidden bg-pet-base px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <Badge
+              variant="secondary"
+              className="rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-primary"
+            >
+              Serviços
+            </Badge>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Tudo que seu pet precisa em um só lugar.
+            </h2>
+            <p className="mt-4 text-base leading-7 text-muted-foreground">
+              A estrutura foi organizada para cobrir o cuidado completo, do
+              visual à saúde e à alimentação.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -6 }}
+              >
+                <Card className="group h-full border-border/60 bg-white/95 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
+                  <CardHeader className="items-center text-center">
+                    <div className="mb-2 flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                      <service.icon className="size-6" />
+                    </div>
+                    <CardTitle className="text-lg">{service.name}</CardTitle>
+                    <Badge variant="outline" className="rounded-full">
+                      Cuidado premium
+                    </Badge>
+                  </CardHeader>
+                  <CardContent className="pb-6 text-center">
+                    <CardDescription className="text-sm leading-6 text-muted-foreground">
+                      {service.desc}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="diferenciais"
+        className="relative z-20 overflow-hidden bg-[#0f93a8] px-4 py-20 sm:px-6"
+      >
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <div className="space-y-4 text-white">
+              <Badge className="rounded-full bg-white/15 text-white hover:bg-white/20">
+                Diferenciais
+              </Badge>
+              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                Um lugar bonito por fora e confiável por dentro.
+              </h2>
+              <p className="max-w-xl text-base leading-7 text-white/80">
+                O objetivo não é só atender. É fazer o pet sair confortável, e o
+                tutor sair seguro de que encontrou um lugar de confiança.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ delay: index * 0.08 }}
+                >
+                  <Card className="h-full border-white/15 bg-white/10 text-white backdrop-blur">
+                    <CardHeader>
+                      <div className="mb-3 flex size-12 items-center justify-center rounded-2xl bg-white/12 text-white">
+                        <feature.icon className="size-5" />
+                      </div>
+                      <CardTitle className="text-xl text-white">
+                        {feature.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-sm leading-6 text-white/75">
+                        {feature.desc}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section id="servicos" className="py-24 bg-slate-50 px-6">
-        <div className="max-w-6xl mx-auto text-center mb-16">
-          <h2 className="text-3xl sm:text-5xl font-bold text-pet-deep mb-4">Serviços Completos</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">Tudo que seu pet precisa em um só lugar, com a qualidade que ele merece.</p>
-        </div>
-
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {services.map((s) => (
-            <motion.div 
-              key={s.id}
-              whileHover={{ y: -10 }}
-              className="bg-white p-8 rounded-[2rem] text-center pixar-shadow hover:bg-pet-ocean group transition-all duration-300"
-            >
-              <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/20 transition-colors">
-                <s.icon className="w-8 h-8 text-pet-deep group-hover:text-white" />
+      <section className="relative z-10 overflow-hidden bg-pet-soft px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <Card className="overflow-hidden border-border/60 bg-white shadow-2xl shadow-primary/20">
+            <CardContent className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div className="space-y-4 text-center lg:text-left">
+                <Badge
+                  variant="outline"
+                  className="rounded-full border-primary/20 bg-primary/5 text-primary"
+                >
+                  Agendamento
+                </Badge>
+                <h2 className="text-3xl font-semibold tracking-tight text-pet-midnight sm:text-4xl">
+                  Pronto para dar o melhor para seu pet?
+                </h2>
+                <p className="max-w-2xl text-base leading-7 text-pet-midnight/70 sm:text-lg">
+                  Agende um banho, tosa ou atendimento e sinta a diferença de
+                  um espaço que trabalha com carinho e organização.
+                </p>
               </div>
-              <h3 className="font-bold text-pet-deep mb-2 group-hover:text-white">{s.name}</h3>
-              <p className="text-xs text-slate-600 group-hover:text-white/80 leading-snug">{s.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
-      {/* Why Us */}
-      <section className="py-24 bg-pet-deep text-white overflow-hidden relative">
-        <div className="absolute bottom-[-100px] left-[-100px] w-64 h-64 bg-pet-ocean/30 rounded-full blur-3xl opacity-50" />
-        
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-12">
-          {features.map((f) => (
-            <div key={f.title} className="text-center md:text-left">
-              <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
-                <f.icon className="w-7 h-7 text-pet-ocean" />
+              <div className="flex flex-col gap-3">
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({
+                    variant: "default",
+                    size: "lg",
+                  })}
+                >
+                  Falar pelo WhatsApp
+                </a>
+                <a
+                  href={mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({
+                    variant: "outline",
+                    size: "lg",
+                  })}
+                >
+                  Ver no Google Maps
+                </a>
               </div>
-              <h3 className="text-2xl font-bold mb-4">{f.title}</h3>
-              <p className="text-slate-300 leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto bg-pet-deep rounded-[3rem] p-12 text-center text-white relative overflow-hidden shadow-2xl">
-          <h2 className="text-3xl sm:text-5xl font-bold mb-8">Pronto para dar o melhor <br /> para seu pet?</h2>
-          <p className="text-xl text-white/80 mb-12">Agende agora um banho ou tosa e sinta a diferença no sorriso do seu melhor amigo.</p>
-          <a 
-            href={whatsappLink}
-            aria-label="Agendar via WhatsApp agora"
-            className="bg-white text-pet-deep px-10 py-5 rounded-full text-xl font-bold shadow-lg hover:scale-110 active:scale-95 transition-transform inline-flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-pet-deep"
-          >
-            Falar pelo WhatsApp
-          </a>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer id="contato" className="bg-slate-900 pt-20 pb-10 text-slate-400 px-6">
+      <footer id="contato" className="bg-pet-deep px-4 pb-10 pt-16 sm:px-6 relative z-10 text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
-        <div className="max-w-6xl mx-auto grid gap-12 pb-16 border-b border-slate-800 md:grid-cols-[1.2fr_0.9fr_0.9fr]">
-          <div>
-            <div className="flex items-center gap-2 mb-6 text-white text-2xl font-bold">
-              <div className="w-10 h-10 bg-pet-ocean rounded-full flex items-center justify-center">B</div>
-              {businessName}
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.9fr_0.9fr]">
+          <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <LogoMark className="size-11" />
+                <div>
+                  <h3 className="text-lg font-semibold text-white">
+                    {businessName}
+                  </h3>
+                  <p className="text-sm text-pet-soft/80">
+                    Pet shop em Santa Rita/PB
+                  </p>
+                </div>
+              </div>
+              <p className="max-w-md text-sm leading-7 text-pet-soft/80">
+                Banho e tosa, atendimento veterinário, acessórios, medicamentos
+                e rações para o cuidado completo do seu pet.
+              </p>
+              <div className="flex gap-3">
+                <a
+                  href="https://instagram.com/ateliepetblue"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Siga o Ateliê Pet Blue no Instagram"
+                  className={`${buttonVariants({
+                    variant: "outline",
+                    size: "icon",
+                  })} border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white`}
+                >
+                  <ExternalLink className="size-4" />
+                </a>
+              </div>
             </div>
-            <p className="mb-6 max-w-md">
-              Pet shop em Santa Rita, PB com banho e tosa, atendimento veterinário, acessórios, medicamentos e rações para o cuidado completo do seu pet.
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="https://instagram.com/ateliepetblue"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Siga o Ateliê Pet Blue no Instagram"
-                className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-pet-ocean transition-colors text-white focus-visible:ring-2 focus-visible:ring-pet-ocean focus-visible:ring-offset-2"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
 
-          <div>
-            <h4 className="text-white font-bold mb-6">Serviços locais</h4>
-            <ul className="space-y-3">
-              <li>Banho e tosa em Santa Rita</li>
-              <li>Atendimento veterinário</li>
-              <li>Acessórios e medicamentos</li>
-              <li>Rações para cães e gatos</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-6">Contato e endereço</h4>
             <div className="space-y-4">
-              <a href={businessPhoneHref} className="flex items-center gap-3 text-white font-bold text-xl hover:text-pet-ocean transition-colors">
-                <Phone className="w-6 h-6 text-pet-ocean" />
-                {businessPhone}
-              </a>
-              <a href={whatsappLink} className="inline-flex items-center gap-2 text-white font-medium hover:text-pet-ocean transition-colors">
-                Abrir WhatsApp
-                <ExternalLink className="w-4 h-4" />
-              </a>
-              <address className="not-italic flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-pet-ocean mt-0.5 shrink-0" />
-                <span>{addressLabel}</span>
-              </address>
-              <a
-                href={mapsLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-white font-medium hover:text-pet-ocean transition-colors"
-              >
-                Ver no Google Maps
-                <ExternalLink className="w-4 h-4" />
-              </a>
+              <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
+                Serviços locais
+              </h4>
+              <Card className="border-white/15 bg-white/5 backdrop-blur shadow-none">
+                <CardContent className="space-y-3 p-5 text-sm text-pet-soft/80">
+                  <div>Banho e tosa em Santa Rita</div>
+                  <div>Atendimento veterinário</div>
+                  <div>Acessórios e medicamentos</div>
+                  <div>Rações para cães e gatos</div>
+                </CardContent>
+              </Card>
             </div>
-          </div>
-        </div>
 
-        <div className="max-w-6xl mx-auto pt-10 flex flex-col gap-4 text-center text-sm md:flex-row md:items-center md:justify-between md:text-left">
-          <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2">
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-pet-ocean" />
-              <span>Segunda a Sexta: 08h às 17h</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-pet-ocean" />
-              <span>Sábado: 08h às 15h</span>
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
+                Contato e endereço
+              </h4>
+              <Card className="border-white/15 bg-white/5 backdrop-blur shadow-none">
+                <CardContent className="space-y-4 p-5 text-sm text-pet-soft/80">
+                  <a
+                    href={businessPhoneHref}
+                    className="flex items-center gap-3 font-semibold text-white transition-colors hover:text-pet-soft"
+                  >
+                    <Phone className="size-4 text-pet-sky" />
+                    {businessPhone}
+                  </a>
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-pet-soft"
+                  >
+                    <WhatsAppIcon className="text-pet-sky" />
+                    Abrir WhatsApp
+                    <ExternalLink className="size-4" />
+                  </a>
+                  <address className="not-italic flex items-start gap-3 text-sm text-pet-soft/80">
+                    <MapPin className="mt-0.5 size-4 shrink-0 text-pet-sky" />
+                    <span>{addressLabel}</span>
+                  </address>
+                  <a
+                    href={mapsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-pet-soft"
+                  >
+                    Ver no Google Maps
+                    <ExternalLink className="size-4" />
+                  </a>
+                </CardContent>
+              </Card>
             </div>
           </div>
-          <p>© 2026 Ateliê Pet Blue. Pet shop em Santa Rita/PB com cuidado, confiança e proximidade.</p>
+
+          <Separator className="my-8 bg-white/15" />
+
+          <div className="flex flex-col gap-4 text-center text-sm text-pet-soft/70 md:flex-row md:items-center md:justify-between md:text-left">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 md:justify-start">
+              <div className="flex items-center gap-2">
+                <Clock className="size-4 text-pet-sky" />
+                <span>Segunda a sexta: 08h às 17h</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="size-4 text-pet-sky" />
+                <span>Sábado: 08h às 15h</span>
+              </div>
+            </div>
+            <p>
+              © 2026 Ateliê Pet Blue. Cuidado, confiança e proximidade em Santa
+              Rita/PB.
+            </p>
+          </div>
         </div>
       </footer>
+
+      {/* Color Palette Design System Overlay */}
+      <div className="fixed bottom-6 right-6 z-[100] hidden lg:block">
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          className="glass flex items-center gap-4 rounded-full p-2.5 shadow-2xl transition-all hover:scale-105"
+        >
+          <div className="flex -space-x-2 px-1">
+            <div
+              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
+              style={{ backgroundColor: "#001e47" }}
+              title="Pet Midnight (#001e47)"
+            />
+            <div
+              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
+              style={{ backgroundColor: "#004da5" }}
+              title="Pet Deep (#004da5)"
+            />
+            <div
+              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
+              style={{ backgroundColor: "#0f93a8" }}
+              title="Pet Ocean (#0f93a8)"
+            />
+            <div
+              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
+              style={{ backgroundColor: "#8cb9c8" }}
+              title="Pet Sky (#8cb9c8)"
+            />
+            <div
+              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
+              style={{ backgroundColor: "#dff1f5" }}
+              title="Pet Soft (#dff1f5)"
+            />
+            <div
+              className="size-8 rounded-full border-2 border-white shadow-sm transition-transform hover:z-10 hover:scale-125"
+              style={{ backgroundColor: "#f8fbff" }}
+              title="Pet Base (#f8fbff)"
+            />
+          </div>
+          <div className="pr-4 border-l border-foreground/10 pl-4">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">Design System</p>
+            <p className="text-xs font-semibold text-foreground">Pet Blue Palette</p>
+          </div>
+        </motion.div>
+      </div>
     </main>
   );
 }

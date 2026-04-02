@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -12,8 +9,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ateliê Pet Blue | Cuidado com Amor 🐾",
-  description: "Banho & Tosa, Veterinário e Acessórios em Santa Rita, PB. Seu pet merece o melhor cuidado Pixar Style!",
+  title: "Ateliê Pet Blue | Cuidado com Amor",
+  description:
+    "Banho e tosa, veterinário e acessórios em Santa Rita, PB. Seu pet merece um cuidado completo e acolhedor.",
 };
 
 export default function RootLayout({
@@ -22,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={cn("scroll-smooth", "font-sans", geist.variable)}>
+    <html lang="pt-BR" className="scroll-smooth">
       <body className={`${dmSans.variable} font-sans antialiased`}>
         {children}
       </body>
